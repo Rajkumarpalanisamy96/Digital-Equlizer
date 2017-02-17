@@ -1,0 +1,15 @@
+x= cos(2*pi*12*[0:0.001:1.23]);
+[b_butter a_butter] = butter(4, 0.4, 'low');
+H_butter = freqz(b_butter, a_butter);
+[b_cheby a_cheby] = cheby1(4,0.1,0.4, 'low');
+H_cheby = freqz(b_cheby, a_cheby);
+[b_ellip a_ellip] = ellip(4,0.5, 30,0.4, 'low');
+H_ellip = freqz(b_ellip, a_ellip);
+norm_freq_axis = [0:1/(512 -1):1];
+plot(norm_freq_axis, abs(H_butter)) 
+hold on
+plot(norm_freq_axis, abs(H_cheby),'r')
+plot(norm_freq_axis, abs(H_ellip),'g') 
+legend('Butterworth', 'Chebyshev','elliptical')
+xlabel('Normalised Frequency'); 
+ylabel('Magnitude')
